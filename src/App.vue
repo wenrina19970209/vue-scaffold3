@@ -1,28 +1,32 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+   <!-- 根组件 -->
+   <div>
+       <router-view/>
+       <FooterGuide v-if="$route.meta.isFooterGuide"/>
+   </div>
 </template>
-
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import FooterGuide from './components/FooterGuide/FooterGuide.vue'
+import { reCategorys,reAddress,reShops } from './api'
 export default {
-  name: 'app',
-  components: {
-    HelloWorld
-  }
+    name:'App',
+    data(){
+        return {
+            msg:'App Component'
+        }
+    },
+    mounted(){
+        //分发action,从后台获取数据到state
+        this.$store.dispatch('getAddress')
+    },
+    components:{ //注册组件
+        FooterGuide
+    }
 }
 </script>
-
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style lang="stylus" rel="stylesheet/stylus" scoped>
 </style>
+
+
+
+
